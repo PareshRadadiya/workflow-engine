@@ -127,14 +127,20 @@ describe('WorkflowController', () => {
     });
   });
 
-  describe('getExampleWorkflows', () => {
-    it('should return example workflows', () => {
-      const result = controller.getExampleWorkflows();
-      
-      expect(result).toHaveProperty('simple');
-      expect(result).toHaveProperty('withDependencies');
-      expect(result).toHaveProperty('parallel');
-      expect(result).toHaveProperty('retry');
+  describe('runDecoratedWorkflow', () => {
+    it('should return workflow result', async () => {
+      const mockResult: WorkflowResult = {
+        success: true,
+        results: new Map(),
+        duration: 250,
+        errors: [],
+      };
+
+      jest.spyOn(workflowEngine, 'run').mockResolvedValue(mockResult);
+
+      const result = await controller.runDecoratedWorkflow();
+      expect(result).toBe(mockResult);
+      expect(workflowEngine.run).toHaveBeenCalledTimes(1);
     });
   });
 }); 
