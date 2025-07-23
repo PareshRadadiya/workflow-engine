@@ -1,22 +1,5 @@
-import { DEFAULT_RETRYABLE_ERRORS } from '../constants';
-
-export type RetryStrategy = 'exponential' | 'linear' | 'jitter';
-
-export interface RetryAttempt {
-  timestamp: number;
-  success: boolean;
-  errorMessage?: string;
-  duration: number;
-}
-
-export interface RetryConfig {
-  maxRetries: number;
-  timeoutMs: number;
-  exponentialBackoff: boolean;
-  baseDelayMs: number;
-  strategy?: RetryStrategy;
-  maxDelayMs?: number;
-}
+import { DEFAULT_RETRYABLE_ERRORS } from '../constants/workflow.constants';
+import { RetryConfig } from '../interfaces/retry.interface';
 
 /**
  * Delays execution for a specified number of milliseconds

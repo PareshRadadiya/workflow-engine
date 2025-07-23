@@ -1,12 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { TaskStep } from './task.decorator';
+import { TaskStep } from '../decorators/task.decorator';
 
-/**
- * Example task service demonstrating decorator usage
- * This service is injectable and can be used in controllers and other services
- */
 @Injectable()
-export class ExampleTasksService {
+export class DecoratedTasksService {
   /**
    * Simulates a task with a delay and returns the specified result
    * @param delay Delay in milliseconds

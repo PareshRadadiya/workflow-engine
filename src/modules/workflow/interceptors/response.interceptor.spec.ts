@@ -1,17 +1,17 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { of } from 'rxjs';
-import { WorkflowResponseInterceptor } from './workflow-response.interceptor';
-import { WorkflowResult, TaskResult } from '../task.interface';
+import { ResponseInterceptor } from '../interceptors/response.interceptor';
+import { WorkflowResult, TaskResult } from '../interfaces/task.interface';
 
-describe('WorkflowResponseInterceptor', () => {
-  let interceptor: WorkflowResponseInterceptor;
+describe('ResponseInterceptor', () => {
+  let interceptor: ResponseInterceptor;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [WorkflowResponseInterceptor],
+      providers: [ResponseInterceptor],
     }).compile();
 
-    interceptor = module.get<WorkflowResponseInterceptor>(WorkflowResponseInterceptor);
+    interceptor = module.get<ResponseInterceptor>(ResponseInterceptor);
   });
 
   it('should be defined', () => {

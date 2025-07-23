@@ -4,9 +4,9 @@ import {
   shouldRetry,
   createRetryConfig,
   validateRetryConfig,
-  RetryConfig,
-  RetryStrategy,
 } from './retry-utils';
+
+import { RetryConfig, RetryStrategy } from '../interfaces/retry.interface';
 
 describe('RetryUtils', () => {
   describe('delay', () => {

@@ -1,7 +1,7 @@
-import { Injectable, Type } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { TaskDefinition } from './task.interface';
-import { TASK_METADATA_KEY, TaskMetadata } from './task.decorator';
+import { TaskDefinition } from '../interfaces/task.interface';
+import { TASK_METADATA_KEY, TaskMetadata } from '../decorators/task.decorator';
 
 @Injectable()
 export class TaskExtractorService {

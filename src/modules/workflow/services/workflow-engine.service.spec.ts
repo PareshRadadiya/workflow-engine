@@ -1,10 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { WorkflowEngineService } from './workflow-engine.service';
-import { WorkflowValidatorService } from './workflow-validator.service';
+import { ValidatorService } from '../services/validator.service';
 import { RetryHandlerService } from './retry-handler.service';
-import { TaskDefinition } from './task.interface';
-import { WorkflowEvent } from './events.enum';
+import { TaskDefinition } from '../interfaces/task.interface';
+import { WorkflowEvent } from '../enums/events.enum';
 
 describe('WorkflowEngineService', () => {
   let service: WorkflowEngineService;
@@ -14,7 +14,7 @@ describe('WorkflowEngineService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         WorkflowEngineService,
-        WorkflowValidatorService,
+        ValidatorService,
         RetryHandlerService,
         {
           provide: EventEmitter2,

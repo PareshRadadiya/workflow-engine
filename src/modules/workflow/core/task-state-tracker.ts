@@ -1,4 +1,4 @@
-import { TaskDefinition } from './task.interface';
+import { TaskDefinition } from '@workflow/interfaces/task.interface';
 
 /**
  * Tracks the execution state of tasks in a workflow

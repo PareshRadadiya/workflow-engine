@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventEmitter2 } from '@nestjs/event-emitter';
 import { RetryHandlerService } from './retry-handler.service';
-import { TaskDefinition } from './task.interface';
-import { WorkflowEvent } from './events.enum';
+import { TaskDefinition } from '../interfaces/task.interface';
+import { WorkflowEvent } from  '../enums/events.enum';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 import {
   calculateRetryDelay,
   shouldRetry,
   createRetryConfig,
   validateRetryConfig,
-  RetryConfig,
-} from './utils/retry-utils';
+} from '../utils/retry-utils';
+import { RetryConfig } from '../interfaces/retry.interface';
 
 describe('RetryHandlerService', () => {
   let service: RetryHandlerService;

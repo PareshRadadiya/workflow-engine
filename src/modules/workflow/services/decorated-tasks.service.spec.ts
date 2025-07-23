@@ -1,67 +1,17 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ExampleTasksService } from './example-tasks.service';
-import { TaskExtractorService } from './task-extractor.service';
-import { Reflector } from '@nestjs/core';
+import { DecoratedTasksService } from './decorated-tasks.service';
+import { TaskExtractorService } from '../services/task-extractor.service';
 
-describe('ExampleTasksService', () => {
-  let service: ExampleTasksService;
+describe('DecoratedTasksService', () => {
+  let service: DecoratedTasksService;
   let taskExtractor: TaskExtractorService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        ExampleTasksService,
-        TaskExtractorService,
-        {
-          provide: Reflector,
-          useValue: {
-            get: jest.fn((metadataKey, target) => {
-              // Mock the metadata that would be returned by the @TaskStep decorator
-              if (metadataKey === 'workflow:task') {
-                const methodName = target?.name || 'unknown';
-                const metadataMap: Record<string, any> = {
-                  fetchData: {
-                    id: 'fetchData',
-                    retries: 2,
-                    timeoutMs: 1000,
-                    description: 'Fetch data from remote API',
-                  },
-                  processData: {
-                    id: 'processData',
-                    dependencies: ['fetchData'],
-                    retries: 1,
-                    timeoutMs: 500,
-                    description: 'Process the fetched data',
-                  },
-                  saveResult: {
-                    id: 'saveResult',
-                    dependencies: ['processData'],
-                    description: 'Save processed result to database',
-                  },
-                  validateData: {
-                    id: 'validateData',
-                    dependencies: ['fetchData'],
-                    retries: 1,
-                    timeoutMs: 300,
-                    description: 'Validate fetched data',
-                  },
-                  generateReport: {
-                    id: 'generateReport',
-                    retries: 0,
-                    timeoutMs: 2000,
-                    description: 'Generate summary report',
-                  },
-                };
-                return metadataMap[methodName];
-              }
-              return undefined;
-            }),
-          },
-        },
-      ],
+      providers: [DecoratedTasksService, TaskExtractorService],
     }).compile();
 
-    service = module.get<ExampleTasksService>(ExampleTasksService);
+    service = module.get<DecoratedTasksService>(DecoratedTasksService);
     taskExtractor = module.get<TaskExtractorService>(TaskExtractorService);
   });
 
@@ -156,5 +106,5 @@ describe('ExampleTasksService', () => {
 
     // Should take at least 100ms (the simulated delay)
     expect(duration).toBeGreaterThanOrEqual(90);
-  });
+  })
 });

@@ -1,16 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { WorkflowValidatorService } from './workflow-validator.service';
-import { TaskDefinition } from './task.interface';
+import { ValidatorService } from '../services/validator.service';
+import { TaskDefinition } from '../interfaces/task.interface';
 
-describe('WorkflowValidatorService', () => {
-  let service: WorkflowValidatorService;
+describe('ValidatorService', () => {
+  let service: ValidatorService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [WorkflowValidatorService],
+      providers: [ValidatorService],
     }).compile();
 
-    service = module.get<WorkflowValidatorService>(WorkflowValidatorService);
+    service = module.get<ValidatorService>(ValidatorService);
   });
 
   it('should be defined', () => {

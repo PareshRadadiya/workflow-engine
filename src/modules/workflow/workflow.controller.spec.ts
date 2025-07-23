@@ -1,10 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { WorkflowController } from './workflow.controller';
-import { WorkflowEngineService } from './workflow-engine.service';
-import { TaskExtractorService } from './task-extractor.service';
-import { ExampleTasksService } from './example-tasks.service';
-import { WorkflowResult } from './task.interface';
-import { TestUtils } from './test-utils';
+import { WorkflowEngineService } from './services/workflow-engine.service';
+import { TaskExtractorService } from './services/task-extractor.service';
+import { DecoratedTasksService } from './services/decorated-tasks.service';
+import { WorkflowResult } from './interfaces/task.interface';
 
 describe('WorkflowController', () => {
   let controller: WorkflowController;
@@ -27,7 +26,7 @@ describe('WorkflowController', () => {
           },
         },
         {
-          provide: ExampleTasksService,
+          provide: DecoratedTasksService,
           useValue: {},
         },
       ],

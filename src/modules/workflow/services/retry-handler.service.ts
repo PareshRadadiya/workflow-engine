@@ -4,26 +4,20 @@ import {
   TaskDefinition,
   TaskResult,
   TaskExecutionContext,
-} from './task.interface';
-import { WorkflowEvent } from './events.enum';
-
+} from '../interfaces/task.interface';
+import { WorkflowEvent } from '../enums/events.enum';
 import {
-  RetryConfig,
-  RetryAttempt,
   delay,
   calculateRetryDelay,
   shouldRetry,
   createRetryConfig,
   validateRetryConfig,
-} from './utils/retry-utils';
-
-export interface RetryResult {
-  success: boolean;
-  result?: TaskResult;
-  error?: Error;
-  retryCount: number;
-  attempts?: RetryAttempt[]; // For audit/debugging
-}
+} from '../utils/retry-utils';
+import {
+  RetryAttempt,
+  RetryConfig,
+  RetryResult,
+} from '../interfaces/retry.interface';
 
 @Injectable()
 export class RetryHandlerService {

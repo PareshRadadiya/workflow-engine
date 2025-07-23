@@ -1,7 +1,7 @@
 import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { WorkflowResult } from '../task.interface';
+import { WorkflowResult } from '@workflow/interfaces/task.interface';
 
 export interface WorkflowApiResponse {
   success: boolean;
@@ -19,7 +19,7 @@ export interface WorkflowApiResponse {
 }
 
 @Injectable()
-export class WorkflowResponseInterceptor implements NestInterceptor<WorkflowResult, WorkflowApiResponse> {
+export class ResponseInterceptor implements NestInterceptor<WorkflowResult, WorkflowApiResponse> {
   intercept(context: ExecutionContext, next: CallHandler): Observable<WorkflowApiResponse> {
     return next.handle().pipe(
       map((result: WorkflowResult) => this.transformToApiFormat(result)),

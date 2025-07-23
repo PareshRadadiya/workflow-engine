@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { TaskDefinition } from './task.interface';
-import { VALIDATION_ERRORS } from './constants';
+import { TaskDefinition } from '../interfaces/task.interface';
+import { VALIDATION_ERRORS } from '../constants/workflow.constants';
 
 @Injectable()
-export class WorkflowValidatorService {
+export class ValidatorService {
   /**
    * Validates a workflow definition for correctness
    * @param workflow Array of task definitions to validate

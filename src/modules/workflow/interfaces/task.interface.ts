@@ -1,4 +1,4 @@
-import { RetryStrategy } from './utils/retry-utils';
+import { RetryStrategy } from '@workflow/interfaces/retry.interface';
 
 export interface TaskDefinition {
   id: string;

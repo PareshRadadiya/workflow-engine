@@ -5,15 +5,15 @@ import {
   TaskResult,
   TaskExecutionContext,
   WorkflowResult,
-} from './task.interface';
-import { WorkflowEvent } from './events.enum';
-import { WorkflowValidatorService } from './workflow-validator.service';
+} from '../interfaces/task.interface';
+import { WorkflowEvent } from '../enums/events.enum';
+import { ValidatorService } from './validator.service';
 import { RetryHandlerService } from './retry-handler.service';
 import {
   WORKFLOW_CONSTANTS,
   LOG_MESSAGES,
-} from './constants';
-import { TaskStateTracker } from './task-state-tracker';
+} from '../constants/workflow.constants';
+import { TaskStateTracker } from '../core/task-state-tracker';
 
 @Injectable()
 export class WorkflowEngineService {
@@ -23,7 +23,7 @@ export class WorkflowEngineService {
 
   constructor(
     private readonly eventEmitter: EventEmitter2,
-    private readonly workflowValidator: WorkflowValidatorService,
+    private readonly workflowValidator: ValidatorService,
     private readonly retryHandler: RetryHandlerService,
   ) {}
 

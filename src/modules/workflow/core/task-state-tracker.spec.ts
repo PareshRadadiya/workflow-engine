@@ -1,5 +1,5 @@
 import { TaskStateTracker } from './task-state-tracker';
-import { TaskDefinition } from './task.interface';
+import { TaskDefinition } from '../interfaces/task.interface';
 
 describe('TaskStateTracker', () => {
   let tracker: TaskStateTracker;

@@ -1,20 +1,21 @@
 import { Controller, Post, UseInterceptors } from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
-import { WorkflowEngineService } from './workflow-engine.service';
-import { TaskExtractorService } from './task-extractor.service';
-import { ExampleTasksService } from './example-tasks.service';
-import { WorkflowResult } from './task.interface';
-import { TestUtils } from './test-utils';
-import { WorkflowResponseInterceptor } from './interceptors/workflow-response.interceptor';
+import { WorkflowEngineService } from '../workflow/services/workflow-engine.service';
+import { TaskExtractorService } from '../workflow/services/task-extractor.service';
+import { DecoratedTasksService } from '../workflow/services/decorated-tasks.service';
+import { WorkflowResult } from '../workflow/interfaces/task.interface';
+import { TestUtils } from '../workflow/utils/test-utils';
+import { ResponseInterceptor } from '../workflow/interceptors/response.interceptor';
+
 
 @ApiTags('workflow')
 @Controller('workflow')
-@UseInterceptors(WorkflowResponseInterceptor)
+@UseInterceptors(ResponseInterceptor)
 export class WorkflowController {
   constructor(
     private readonly workflowEngine: WorkflowEngineService,
     private readonly taskExtractor: TaskExtractorService,
-    private readonly exampleTasksService: ExampleTasksService,
+    private readonly exampleTasksService: DecoratedTasksService,
   ) {}
 
   @Post('run-simple')

@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Reflector } from '@nestjs/core';
 import { TaskExtractorService } from './task-extractor.service';
-import { TaskStep } from './task.decorator';
+import { TaskStep } from '../decorators/task.decorator';
 
 class TestTaskClass {
   @TaskStep({

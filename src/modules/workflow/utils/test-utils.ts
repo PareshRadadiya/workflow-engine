@@ -1,4 +1,4 @@
-import { TaskDefinition } from './task.interface';
+import { TaskDefinition } from '../interfaces/task.interface';
 
 /**
  * Test utilities to eliminate redundant code across test files
