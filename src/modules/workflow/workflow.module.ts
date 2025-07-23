@@ -11,11 +11,11 @@ import { ValidatorService } from '@workflow/services/validator.service';
   imports: [EventEmitterModule.forRoot()],
   controllers: [WorkflowController],
   providers: [
-    WorkflowEngineService,
-    ValidatorService,
-    RetryHandlerService,
-    TaskExtractorService,
-    DecoratedTasksService,
+    WorkflowEngineService,    // Core workflow execution engine
+    ValidatorService,         // Workflow validation and dependency checking
+    RetryHandlerService,      // Task retry logic with backoff strategies
+    TaskExtractorService,     // Decorator metadata extraction
+    DecoratedTasksService,    // Management of decorated task services
   ],
   exports: [
     WorkflowEngineService,
