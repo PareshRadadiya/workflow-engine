@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { WorkflowController } from './workflow.controller';
-import { WorkflowEngineService } from './services/workflow-engine.service';
-import { TaskExtractorService } from './services/task-extractor.service';
-import { DecoratedTasksService } from './services/decorated-tasks.service';
-import { WorkflowResult } from './interfaces/task.interface';
+import { TaskExtractorService } from '@workflow/services/task-extractor.service';
+import { DecoratedTasksService } from '@workflow/services/decorated-tasks.service';
+import { WorkflowResult } from '@workflow/interfaces/task.interface';
+import { WorkflowEngineService } from '@workflow/services/workflow-engine.service';
 
 describe('WorkflowController', () => {
   let controller: WorkflowController;
@@ -54,10 +54,12 @@ describe('WorkflowController', () => {
       const result = await controller.runSimpleWorkflow();
       expect(result).toBe(mockResult);
       expect(workflowEngine.run).toHaveBeenCalledTimes(1);
-      expect(workflowEngine.run).toHaveBeenCalledWith(expect.arrayContaining([
-        expect.objectContaining({ id: 'task1' }),
-        expect.objectContaining({ id: 'task2' }),
-      ]));
+      expect(workflowEngine.run).toHaveBeenCalledWith(
+        expect.arrayContaining([
+          expect.objectContaining({ id: 'task1' }),
+          expect.objectContaining({ id: 'task2' }),
+        ]),
+      );
     });
   });
 
@@ -75,11 +77,13 @@ describe('WorkflowController', () => {
       const result = await controller.runDependencyWorkflow();
       expect(result).toBe(mockResult);
       expect(workflowEngine.run).toHaveBeenCalledTimes(1);
-      expect(workflowEngine.run).toHaveBeenCalledWith(expect.arrayContaining([
-        expect.objectContaining({ id: 'task1' }),
-        expect.objectContaining({ id: 'task2', dependencies: ['task1'] }),
-        expect.objectContaining({ id: 'task3', dependencies: ['task2'] }),
-      ]));
+      expect(workflowEngine.run).toHaveBeenCalledWith(
+        expect.arrayContaining([
+          expect.objectContaining({ id: 'task1' }),
+          expect.objectContaining({ id: 'task2', dependencies: ['task1'] }),
+          expect.objectContaining({ id: 'task3', dependencies: ['task2'] }),
+        ]),
+      );
     });
   });
 
@@ -97,11 +101,16 @@ describe('WorkflowController', () => {
       const result = await controller.runParallelWorkflow();
       expect(result).toBe(mockResult);
       expect(workflowEngine.run).toHaveBeenCalledTimes(1);
-      expect(workflowEngine.run).toHaveBeenCalledWith(expect.arrayContaining([
-        expect.objectContaining({ id: 'task1' }),
-        expect.objectContaining({ id: 'task2' }),
-        expect.objectContaining({ id: 'task3', dependencies: ['task1', 'task2'] }),
-      ]));
+      expect(workflowEngine.run).toHaveBeenCalledWith(
+        expect.arrayContaining([
+          expect.objectContaining({ id: 'task1' }),
+          expect.objectContaining({ id: 'task2' }),
+          expect.objectContaining({
+            id: 'task3',
+            dependencies: ['task1', 'task2'],
+          }),
+        ]),
+      );
     });
   });
 
@@ -119,10 +128,19 @@ describe('WorkflowController', () => {
       const result = await controller.runRetryWorkflow();
       expect(result).toBe(mockResult);
       expect(workflowEngine.run).toHaveBeenCalledTimes(1);
-      expect(workflowEngine.run).toHaveBeenCalledWith(expect.arrayContaining([
-        expect.objectContaining({ id: 'unreliableTask', retries: 2, timeoutMs: 1000 }),
-        expect.objectContaining({ id: 'dependentTask', dependencies: ['unreliableTask'] }),
-      ]));
+      expect(workflowEngine.run).toHaveBeenCalledWith(
+        expect.arrayContaining([
+          expect.objectContaining({
+            id: 'unreliableTask',
+            retries: 2,
+            timeoutMs: 1000,
+          }),
+          expect.objectContaining({
+            id: 'dependentTask',
+            dependencies: ['unreliableTask'],
+          }),
+        ]),
+      );
     });
   });
 
@@ -142,4 +160,4 @@ describe('WorkflowController', () => {
       expect(workflowEngine.run).toHaveBeenCalledTimes(1);
     });
   });
-}); 
+});

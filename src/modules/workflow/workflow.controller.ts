@@ -4,7 +4,7 @@ import { WorkflowEngineService } from '@workflow/services/workflow-engine.servic
 import { TaskExtractorService } from '@workflow/services/task-extractor.service';
 import { DecoratedTasksService } from '@workflow/services/decorated-tasks.service';
 import { WorkflowResult } from '@workflow/interfaces/task.interface';
-import { TestUtils } from '../workflow/utils/test-utils';
+import { TestUtils } from '@workflow/utils/test-utils';
 import { ExecuteWorkflowDto } from '@workflow/dto/execute-workflow.dto';
 
 

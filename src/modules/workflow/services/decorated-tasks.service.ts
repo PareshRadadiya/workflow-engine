@@ -21,7 +21,7 @@ export class DecoratedTasksService {
     description: 'Fetch data from remote API',
   })
   async fetchData() {
-    return await this.simulateTask(100, {
+    return this.simulateTask(100, {
       users: [
         { id: 1, name: 'John' },
         { id: 2, name: 'Jane' },
@@ -37,7 +37,7 @@ export class DecoratedTasksService {
     description: 'Process the fetched data',
   })
   async processData() {
-    return await this.simulateTask(50, { processed: true, count: 2 });
+    return this.simulateTask(50, { processed: true, count: 2 });
   }
 
   @TaskStep({
@@ -46,7 +46,7 @@ export class DecoratedTasksService {
     description: 'Save processed result to database',
   })
   async saveResult() {
-    return await this.simulateTask(75, {
+    return this.simulateTask(75, {
       saved: true,
       timestamp: new Date().toISOString(),
     });
@@ -63,7 +63,7 @@ export class DecoratedTasksService {
     description: 'Validate fetched data',
   })
   async validateData() {
-    return await this.simulateTask(30, {
+    return this.simulateTask(30, {
       valid: true,
       validationErrors: [],
     });
@@ -79,7 +79,7 @@ export class DecoratedTasksService {
     description: 'Generate summary report',
   })
   async generateReport() {
-    return await this.simulateTask(150, {
+    return this.simulateTask(150, {
       report: 'Monthly Summary Report',
       generatedAt: new Date().toISOString(),
     });
